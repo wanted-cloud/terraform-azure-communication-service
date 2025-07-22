@@ -4,4 +4,19 @@ resource "azurerm_communication_service_email_domain_association" "this" {
 
   communication_service_id = azurerm_communication_service.this.id
   email_service_domain_id  = each.value.id
+
+  timeouts {
+    create = try(
+      local.metadata.resource_timeouts["azurerm_communication_service_email_domain_association"]["create"],
+      local.metadata.resource_timeouts["default"]["create"]
+    )
+    read = try(
+      local.metadata.resource_timeouts["azurerm_communication_service_email_domain_association"]["read"],
+      local.metadata.resource_timeouts["default"]["read"]
+    )
+    delete = try(
+      local.metadata.resource_timeouts["azurerm_communication_service_email_domain_association"]["delete"],
+      local.metadata.resource_timeouts["default"]["delete"]
+    )
+  }
 }

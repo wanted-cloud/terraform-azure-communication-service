@@ -1,9 +1,30 @@
 /*
- * # wanted-cloud/terraform-module-template
+ * # wanted-cloud/terraform-azure-communication-service
  * 
- * This repository represents a template for a Terraform building block module as we think it should be done, so it's for sure opinionated but in our eyes simple and powerful. Feel free to use or contribute.
+ * Terraform building block managing Azure Communication Service and related resources.
  */
 
-/*
- * Here is perfect place for you main resource which should be created by this module. Use "this" as name for the main resource and its dependencies.
- */
+resource "azurerm_communication_service" "this" {
+  name                = var.name
+  resource_group_name = data.azurerm_resource_group.this.nam
+  data_location       = var.data_location
+
+  timeouts {
+    create = try(
+      local.metadata.resource_timeouts["azurerm_communication_service"]["create"],
+      local.metadata.resource_timeouts["default"]["create"]
+    )
+    read = try(
+      local.metadata.resource_timeouts["azurerm_communication_service"]["read"],
+      local.metadata.resource_timeouts["default"]["read"]
+    )
+    update = try(
+      local.metadata.resource_timeouts["azurerm_communication_service"]["update"],
+      local.metadata.resource_timeouts["default"]["update"]
+    )
+    delete = try(
+      local.metadata.resource_timeouts["azurerm_communication_service"]["delete"],
+      local.metadata.resource_timeouts["default"]["delete"]
+    )
+  }
+}

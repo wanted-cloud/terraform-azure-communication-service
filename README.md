@@ -1,7 +1,7 @@
 <!-- BEGIN_TF_DOCS -->
-# wanted-cloud/terraform-module-template
+# wanted-cloud/terraform-azure-communication-service
 
-This repository represents a template for a Terraform building block module as we think it should be done, so it's for sure opinionated but in our eyes simple and powerful. Feel free to use or contribute.
+Terraform building block managing Azure Communication Service and related resources.
 
 ## Table of contents
 
@@ -15,19 +15,53 @@ This repository represents a template for a Terraform building block module as w
 
 ## Requirements
 
-No requirements.
+The following requirements are needed by this module:
+
+- <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (>= 1.11)
+
+- <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (>=4.20.0)
 
 ## Providers
 
-No providers.
+The following providers are used by this module:
+
+- <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) (>=4.20.0)
 
 ## Required Inputs
 
-No required inputs.
+The following input variables are required:
+
+### <a name="input_name"></a> [name](#input\_name)
+
+Description: Name of the Azure Keyvault.
+
+Type: `string`
+
+### <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name)
+
+Description: Name of the resource group in which the Azure Keyvault will be created.
+
+Type: `string`
 
 ## Optional Inputs
 
 The following input variables are optional (have default values):
+
+### <a name="input_data_location"></a> [data\_location](#input\_data\_location)
+
+Description: Location of the data for the Azure Communication Service.
+
+Type: `string`
+
+Default: `"Europe"`
+
+### <a name="input_email_domains"></a> [email\_domains](#input\_email\_domains)
+
+Description: List of email domains to be used for the Azure Communication Service.
+
+Type: `list(string)`
+
+Default: `[]`
 
 ### <a name="input_metadata"></a> [metadata](#input\_metadata)
 
@@ -55,13 +89,33 @@ object({
 
 Default: `{}`
 
+### <a name="input_tags"></a> [tags](#input\_tags)
+
+Description: A map of tags to assign to the resource.
+
+Type: `map(string)`
+
+Default: `{}`
+
 ## Outputs
 
-No outputs.
+The following outputs are exported:
+
+### <a name="output_communication_service"></a> [communication\_service](#output\_communication\_service)
+
+Description: Values of the Azure Communication Service resource.
+
+### <a name="output_email_domain_ids"></a> [email\_domain\_ids](#output\_email\_domain\_ids)
+
+Description: List of email domain IDs associated with the Azure Communication Service.
 
 ## Resources
 
-No resources.
+The following resources are used by this module:
+
+- [azurerm_communication_service.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/communication_service) (resource)
+- [azurerm_communication_service_email_domain_association.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/communication_service_email_domain_association) (resource)
+- [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/resource_group) (data source)
 
 ## Usage
 

@@ -9,6 +9,8 @@ resource "azurerm_communication_service" "this" {
   resource_group_name = data.azurerm_resource_group.this.nam
   data_location       = var.data_location
 
+  tags = merge(local.metadata.tags, var.tags)
+
   timeouts {
     create = try(
       local.metadata.resource_timeouts["azurerm_communication_service"]["create"],
